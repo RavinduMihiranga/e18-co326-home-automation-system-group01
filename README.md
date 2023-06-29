@@ -31,3 +31,8 @@ the sensor information. Relays that can control the light bulbs will be used to 
 We will use the MQTT protocol, a lightweight messaging standard that is widely used in IOT
 devices, to store the sensor values. The MQTT broker will store the data in a database after
 receiving the sensor readings from the ESP32 microcontroller.
+
+
+### High Level Solution Architecture
+
+![highLevelArchitecture](docs/images/highLevelArchitecture.jpg)
