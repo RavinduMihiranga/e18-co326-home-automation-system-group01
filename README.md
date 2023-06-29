@@ -2,6 +2,32 @@ ___
 # HOME AUTOMATION SYSTEM
 ___
 
-## Please refer the instructions in below URL:
+### Introduction
 
-https://projects.ce.pdn.ac.lk/docs/how-to-add-a-project
+Home automation is becoming more and more common in today's society since it provides
+comfort, convenience, and energy efficiency. As technology has advanced, the Internet of
+Things (IoT) has made it possible to create "smart homes," where multiple appliances and
+equipment can be connected to and controlled remotely through the internet.
+
+The goal of this project is to create an Internet of Things (IoT)-based home automation
+system that uses sensors and a mobile user interface to track and control a house's
+temperature, humidity, and light intensity. Through a smartphone application, the system will
+allow users to monitor temperature and humidity levels, automatically turn on and off light
+bulbs, and set those parameters to their preferences.
+
+### Overview
+
+We will use the appropriate sensors in this IOT-based home automation project using the
+ESP32 to detect the temperature, humidity, and light intensity. An ESP32 microcontroller will
+be attached to these sensors, and it will gather data from them.
+
+We will then design a mobile UI to show the sensor information. The mobile interface will use
+Wi-Fi to connect to the ESP32 microcontroller and receive data from it, which it will then use
+to show readings in real time. The system will be controlled and monitored by mobile apps.
+
+We'll automate the light bulbs' on/off switching via the mobile app in addition to displaying
+the sensor information. Relays that can control the light bulbs will be used to do this.
+
+We will use the MQTT protocol, a lightweight messaging standard that is widely used in IOT
+devices, to store the sensor values. The MQTT broker will store the data in a database after
+receiving the sensor readings from the ESP32 microcontroller.
