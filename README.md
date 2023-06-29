@@ -36,4 +36,7 @@ receiving the sensor readings from the ESP32 microcontroller.
 ### High Level Solution Architecture
 
 ![highLevelArchitecture](docs/images/highLevelArchitecture.png)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 26b999b0ba9b6bc1475e0fdb16c66639bd3e7ae6
