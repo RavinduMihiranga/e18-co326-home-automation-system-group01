@@ -10,14 +10,6 @@ title: Home Automation System
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
 # Home Automation System
-![highLevelArchitecture](docs/images/highLevelArchitecture.png)
-![circuitDiagram](docs/images/circuitDiagram.png)
----
-
-This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
-
-![Sample Image](./images/sample.png)
-
 
 ## Team
 - E/18/170, Karunarathna W.K., [email](e180170@eng.pdn.ac.lk)
@@ -56,26 +48,29 @@ We will use the MQTT protocol, a lightweight messaging standard that is widely u
 
 ## Hardware Components
 ### DHT22 Temperature-Humidity Sensor
+![temp](./images/temp.png)
 
 The DHT22 sensor is a small size, low consumption & long transmission distance(20m) enable digital temperature and humidity sensor that operates on 3.3V to 6V power and I/O. With a maximum current usage of 2.5mA during data conversion, it is energy-efficient. It provides accurate readings for humidity ranging from 0 to 100% with an accuracy of 2-5%, making it ideal for precise humidity monitoring. The temperature readings are reliable, with an accuracy of ±0.5°C, covering a wide range from -40 to 80°C With a sampling rate of no more than 0.5 Hz (once every 2 seconds), the DHT22 sensor is suitable for applications where slower data acquisition is acceptable. It has a compact body size of 15.1mm x 25mm x 7.7mm, and features 4 pins with 0.1" spacing, making it easy to integrate into various electronic projects. The DHT22 sensor is commonly used in home automation, weather monitoring, HVAC systems, and agriculture applications due to its affordability, reliability, and accuracy in temperature and humidity measurements.
 
 ### LDR Sensor
+![ldr](./images/ldr.png)
 
 The LDR sensor (Light Dependent Resistor sensor) is a type of passive electronic component that changes its resistance based on the intensity of light falling on it.The LDR sensor typically consists of a semiconductor material that exhibits a higher resistance in the dark and a lower resistance in the presence of light. This characteristic allows LDR sensors to provide analog or digital output that can be used to determine light levels. LDR sensors are typically powered by a DC voltage source and exhibit a slow response time due to the time it takes for the resistance to change in response to changing light levels.
 
 ### Relay Module
+![relay](./images/relay.png)
 
 Single channel relay module is an electronic module that allows a microcontroller or other control signal to control a higher voltage and/or higher current load. Relay uses an electric current to open or close the contacts of a switch. This is usually done using the help of a coil that attracts the contacts of a switch and pulls them together when activated, and a spring pushes them apart when the coil is not energised. Relay module operates with a supply voltage ranging from 3V to 5V, making it compatible with a wide range of power sources. The quiescent current, or the current drawn by the relay module when it is idle, is low at around 2mA, which helps in conserving power. When the relay is active and the load is connected, the relay module draws a current of approximately 70mA to energise the relay and activate the connected load. The relay on the module has a maximum contact voltage rating of 250V AC or 30V DC, which makes it suitable for both AC and DC loads. The relay is capable of handling a maximum current of 10A, allowing it to control high-current devices.
 
 ---
 
 ## High Level Solution Architecture
-![highLevelArchitecture](docs/images/highLevelArchitecture.png)
+![highLevelArchitecture](./images/highLevelArchitecture.png)
 
 ---
 
 ## Circuit Diagram
-![circuitDiagram](docs/images/circuitDiagram.png)
+![circuitDiagram](./images/circuitDiagram.png)
 
 ---
 
@@ -84,7 +79,7 @@ To Power up the microcontroller, an AC to Dc converter will be used. It will pro
 
 Current requirement for components
 
-![calculations](docs/images/calculations.png)
+![calculations](./images/calculations.png)
 
 Maximum output current from ESP32 is 40mA therefore all the components are working properly
 
@@ -92,7 +87,7 @@ Maximum output current from ESP32 is 40mA therefore all the components are worki
 
 ## Budget
 
-![budget](docs/images/budget.png)
+![budget](./images/budget.png)
 
 ---
 
@@ -105,5 +100,4 @@ Maximum output current from ESP32 is 40mA therefore all the components are worki
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
 
-[//]: # (Please refer this to learn more about Markdown syntax)
-[//]: # (https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
