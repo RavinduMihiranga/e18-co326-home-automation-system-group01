@@ -37,6 +37,10 @@ receiving the sensor readings from the ESP32 microcontroller.
 
 ![highLevelArchitecture](docs/images/highLevelArchitecture.png)
 
+### Circuit Diagram
+
+![circuitDiagram](docs/images/circuitDiagram.png)
+
 ### Team members:
 1. E/18/170 Karunarathna W.K. [e180170@eng.pdn.ac.lk]
 2. E/18/203 Madhusanka K.G.A.S. [e18203@eng.pdn.ac.lk]
