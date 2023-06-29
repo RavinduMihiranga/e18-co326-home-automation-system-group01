@@ -2,7 +2,7 @@ ___
 # HOME AUTOMATION SYSTEM
 ___
 
-### Introduction
+## Introduction
 
 Home automation is becoming more and more common in today's society since it provides
 comfort, convenience, and energy efficiency. As technology has advanced, the Internet of
@@ -15,7 +15,7 @@ temperature, humidity, and light intensity. Through a smartphone application, th
 allow users to monitor temperature and humidity levels, automatically turn on and off light
 bulbs, and set those parameters to their preferences.
 
-### Overview
+## Overview
 
 We will use the appropriate sensors in this IOT-based home automation project using the
 ESP32 to detect the temperature, humidity, and light intensity. An ESP32 microcontroller will
@@ -33,11 +33,11 @@ devices, to store the sensor values. The MQTT broker will store the data in a da
 receiving the sensor readings from the ESP32 microcontroller.
 
 
-### High Level Solution Architecture
+## High Level Solution Architecture
 
 ![highLevelArchitecture](docs/images/highLevelArchitecture.png)
 
-### Circuit Diagram
+## Circuit Diagram
 
 ![circuitDiagram](docs/images/circuitDiagram.png)
 
