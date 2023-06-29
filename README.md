@@ -37,3 +37,15 @@ receiving the sensor readings from the ESP32 microcontroller.
 
 ![highLevelArchitecture](docs/images/highLevelArchitecture.png)
 
+### Team members:
+1. E/18/170 Karunarathna W.K. [e180170@eng.pdn.ac.lk]
+2. E/18/203 Madhusanka K.G.A.S. [e18203@eng.pdn.ac.lk]
+3. E/18/224 Mihiranga G.D.R. [e18224@eng.pdn.ac.lk]
+
+### Project supervisors: 
+1. Dr. Kamalanath Samarakoon [kamalanath@eng.pdn.ac.lk]
+
+### Links:
+1. [Github Repository](https://github.com/cepdnaclk/e18-co326-home-automation-system-group01)
+2. [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
+3. [Department of Computer Engineering Github Pages](https://github.com/cepdnaclk)
