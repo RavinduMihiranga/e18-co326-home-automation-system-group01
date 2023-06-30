@@ -1,11 +1,17 @@
 // Libraries
 #include <DHT.h>
 #include <ESP8266WiFi.h>
+#include<time.h>
+#include "NTPClient.h"
+#include "WiFiUdp.h"
 
 // Constants
 #define DHTPIN D2            // Pin connected to DHT sensor
 #define light D4
 #define DHTTYPE DHT21        // DHT 21 (AM2301)
+
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
 void setup() {
   Serial.begin(SERIAL_BAUD);
@@ -14,6 +20,8 @@ void setup() {
   pinMode(DHTPIN, INPUT);
   pinMode(LDR_PIN,INPUT);
   digitalWrite(light, HIGH);// intialy light set to off
+
+   timeClient.begin();
 }
 
 
@@ -23,6 +31,9 @@ float get_farenheit(float celcius){
 
 void loop() {
 
+
+
+  timeClient.update();
 
  //calculate timestamp
   unsigned long now = millis();
