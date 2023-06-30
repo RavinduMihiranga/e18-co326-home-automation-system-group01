@@ -1,16 +1,12 @@
 // Libraries
 #include <DHT.h>
 #include <ESP8266WiFi.h>
-#include<time.h>
-#include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include<time.h>
 #include "NTPClient.h"
 #include "WiFiUdp.h"
 
-// Constants
-#define DHTPIN D2            // Pin connected to DHT sensor
-#define light D4
-#define DHTTYPE DHT21        // DHT 21 (AM2301)
+
 
 
 
@@ -20,15 +16,24 @@ const char* password = "hecker12345";
 const char* mqtt_server = "test.mosquitto.org";
 const long utcOffsetInSeconds = 19800;
 
+
+// Constants
+#define DHTPIN D2            // Pin connected to DHT sensor
+#define light D4
+#define DHTTYPE DHT21        // DHT 21 (AM2301)
+#define VIN 3.3 // V power voltage, 3.3v in case of NodeMCU
+#define R 220 // Voltage devider resistor value
+
 const int LDR_PIN = A0;      // Pin connected to LDR
 const int SERIAL_BAUD = 9600;
 const bool automatic  = false ; // to set automatic mode
+
+
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
-
 
 unsigned long lastMsg = 0;
 #define MSG_BUFFER_SIZE (50)
@@ -37,6 +42,7 @@ char msg[MSG_BUFFER_SIZE];
 unsigned long last = 0; // to calculate timestamp
 
 DHT dht(DHTPIN, DHTTYPE);    // Initialize DHT sensor for normal 16MHz Arduino
+
 
 void setup_wifi() {
   delay(100);
@@ -55,6 +61,19 @@ void setup_wifi() {
   // Connection successful message
   Serial.println("\nWifi connection successful");
 }
+
+void lightsON(){
+  digitalWrite(light, LOW);
+  Serial.println("ONNNN");
+  
+}
+
+
+void lightsOFF(){
+  digitalWrite(light, HIGH);
+  Serial.println("offfff ");
+}
+
 
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -113,6 +132,7 @@ void reconnect() {
     }
   }
 }
+
 int readLDRValue() {
   int value = analogRead(LDR_PIN);
   return value;
@@ -122,6 +142,7 @@ float readHumidity() {
   float humidity = dht.readHumidity();
   return humidity;
 }
+
 float readTemperature() {
   float temperature = dht.readTemperature();
   return temperature;
@@ -152,6 +173,10 @@ void displayIntensity(float intensity) {
 
 }
 
+float get_farenheit(float celcius){
+  return (celcius * 9/5 ) + 32 ;
+}
+
 int conversion(int raw_val){
   // Conversion rule
   float Vout = float(raw_val) * (VIN / float(1023));// Conversion analog to voltage
@@ -163,26 +188,20 @@ int conversion(int raw_val){
 void setup() {
   Serial.begin(SERIAL_BAUD);
   dht.begin();
-
   setup_wifi();
   // Set MQTT broker and port
   client.setServer(mqtt_server, 1883);
   // Set callback function for incoming MQTT messages
    client.setCallback(callback);
   // client.setCallback(callback);
-
+  timeClient.begin();
   pinMode(light, OUTPUT);
   pinMode(DHTPIN, INPUT);
   pinMode(LDR_PIN,INPUT);
   digitalWrite(light, HIGH);// intialy light set to off
-
-   timeClient.begin();
 }
 
 
-float get_farenheit(float celcius){
-  return (celcius * 9/5 ) + 32 ;
-}
 
 void loop() {
 
@@ -195,6 +214,7 @@ void loop() {
 
   timeClient.update();
 
+
  //calculate timestamp
   unsigned long now = millis();
   if (now - lastMsg > 5000) {
@@ -206,6 +226,7 @@ void loop() {
   float humidity = readHumidity();  // Call the function to read humidity value
   float temperature = readTemperature();  // Call the function to read temperature value
 
+  int Iluminance = conversion(ldrValue); // light intensity
 
 
   displayLDRValue(ldrValue);        // Call the function to display LDR value
@@ -213,12 +234,9 @@ void loop() {
   displayTemperature(temperature);  // Call the function to display temperature value
   displayIntensity(Iluminance);  // Call the function to display temperature value
 
+  char timestamp[20];
 
-   float farenheit = get_farenheit(temperature) ;
-
-   int Iluminance = conversion(ldrValue); // light intensity
-
-    int hours = timeClient.getHours();
+  int hours = timeClient.getHours();
   int minutes  = timeClient.getMinutes();
   int seconds = timeClient.getSeconds();
 
@@ -234,11 +252,6 @@ void loop() {
   client.publish("UoP/CO/326/E18/01/dht11/temp",temp_payload.c_str());
   client.publish("UoP/CO/326/E18/01/dht11/hum",hum_payload.c_str());
   client.publish("UoP/CO/326/E18/01/ldr/intensity",light_payload.c_str());
-
-
-
-
-
 
 
 
