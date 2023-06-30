@@ -113,7 +113,44 @@ void reconnect() {
     }
   }
 }
+int readLDRValue() {
+  int value = analogRead(LDR_PIN);
+  return value;
+}
 
+float readHumidity() {
+  float humidity = dht.readHumidity();
+  return humidity;
+}
+float readTemperature() {
+  float temperature = dht.readTemperature();
+  return temperature;
+}
+
+void displayLDRValue(int value) {
+  Serial.print("LDR Value: ");
+  Serial.println(value);
+}
+
+void displayHumidity(float humidity) {
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.println("%");
+}
+
+void displayTemperature(float temperature) {
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" Celsius");
+
+}
+
+void displayIntensity(float intensity) {
+  Serial.print("Light intensity: ");
+  Serial.print(intensity);
+  Serial.println(" lux");
+
+}
 
 int conversion(int raw_val){
   // Conversion rule
