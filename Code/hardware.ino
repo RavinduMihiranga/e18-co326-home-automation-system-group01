@@ -17,16 +17,18 @@ const char* mqtt_server = "test.mosquitto.org";
 const long utcOffsetInSeconds = 19800;
 
 
+const int LDR_PIN = A0;      // Pin connected to LDR
+const int SERIAL_BAUD = 9600;
+
+
+
+
 // Constants
 #define DHTPIN D2            // Pin connected to DHT sensor
 #define light D4
 #define DHTTYPE DHT21        // DHT 21 (AM2301)
 #define VIN 3.3 // V power voltage, 3.3v in case of NodeMCU
 #define R 220 // Voltage devider resistor value
-
-const int LDR_PIN = A0;      // Pin connected to LDR
-const int SERIAL_BAUD = 9600;
-const bool automatic  = false ; // to set automatic mode
 
 
 
@@ -80,34 +82,24 @@ void callback(char* topic, byte* payload, unsigned int length) {
   float temperature = 0;
   Serial.print("Message arrived [");
   Serial.println(topic);
-  // Serial.print(payload);
-  // for (int i = 0; i < length; i++) {
-  //   Serial.print((char)payload[i]);
-  // }
-  
-  //----------------------------------------------------
   if (payload[0] == 'T') {
-    // Switch on the fan
-    // digitalWrite(D1, HIGH);
+    // Switch on the the bulb
     Serial.println("Turn ON");
     lightsON();
-    // Serial.print("Obtained value: ");
     Serial.println((char)payload[0]);
+
   } else if (payload[0] == 'F') {
-    // Switch off the fan
-    // digitalWrite(D1, LOW);
+    // Switch off the the bulb
     Serial.println("Turn OFF");
     lightsOFF();
-    // Serial.print("Obtained value: ");
     Serial.println((char)payload[0]);
+
   } else {
     // Convert the payload to a string and then parse it as a float
     char payloadString[length + 1];
     memcpy(payloadString, payload, length);
     payloadString[length] = '\0'; // Add null terminator
-    
-    temperature = atof(payloadString);
-    Serial.println(temperature);
+
   }
 }
 
@@ -116,13 +108,10 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect("ghfhgfhjfjhfjhfhfjhgfjhfhjfjh")) {
+    if (client.connect("C0326_G01_Homeautomation")) {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-      // client.publish("temperature_output", "Connected...");
-      // ... and resubscribe
+      // resubscribe
       client.subscribe("UoP/CO/326/E18/01/bulb");
-      // client.subscribe("fan_input");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -134,32 +123,38 @@ void reconnect() {
 }
 
 int readLDRValue() {
+// read LDR value
   int value = analogRead(LDR_PIN);
   return value;
 }
 
 float readHumidity() {
+// read humadity value
   float humidity = dht.readHumidity();
   return humidity;
 }
 
 float readTemperature() {
+    // read temperature
   float temperature = dht.readTemperature();
   return temperature;
 }
 
 void displayLDRValue(int value) {
+    // display LDR value
   Serial.print("LDR Value: ");
   Serial.println(value);
 }
 
 void displayHumidity(float humidity) {
+    // display Humidity value
   Serial.print("Humidity: ");
   Serial.print(humidity);
   Serial.println("%");
 }
 
 void displayTemperature(float temperature) {
+    //display temperature value
   Serial.print("Temperature: ");
   Serial.print(temperature);
   Serial.println(" Celsius");
@@ -167,6 +162,7 @@ void displayTemperature(float temperature) {
 }
 
 void displayIntensity(float intensity) {
+    //display light intensity
   Serial.print("Light intensity: ");
   Serial.print(intensity);
   Serial.println(" lux");
@@ -174,6 +170,7 @@ void displayIntensity(float intensity) {
 }
 
 float get_farenheit(float celcius){
+    // convert celcius to fahrenheit
   return (celcius * 9/5 ) + 32 ;
 }
 
@@ -193,7 +190,7 @@ void setup() {
   client.setServer(mqtt_server, 1883);
   // Set callback function for incoming MQTT messages
    client.setCallback(callback);
-  // client.setCallback(callback);
+   // time client begin
   timeClient.begin();
   pinMode(light, OUTPUT);
   pinMode(DHTPIN, INPUT);
@@ -235,7 +232,8 @@ void loop() {
   displayIntensity(Iluminance);  // Call the function to display temperature value
 
   char timestamp[20];
-
+  
+//get time
   int hours = timeClient.getHours();
   int minutes  = timeClient.getMinutes();
   int seconds = timeClient.getSeconds();
