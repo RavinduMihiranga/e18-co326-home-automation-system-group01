@@ -114,6 +114,15 @@ void reconnect() {
   }
 }
 
+
+int conversion(int raw_val){
+  // Conversion rule
+  float Vout = float(raw_val) * (VIN / float(1023));// Conversion analog to voltage
+  float RLDR = (R * (VIN - Vout))/Vout; // Conversion voltage to resistance
+  int lux = 500/(RLDR/1000); // Conversion resitance to lumen
+  return lux;
+}
+
 void setup() {
   Serial.begin(SERIAL_BAUD);
   dht.begin();
@@ -169,6 +178,8 @@ void loop() {
 
 
    float farenheit = get_farenheit(temperature) ;
+
+   int Iluminance = conversion(ldrValue); // light intensity
 
     int hours = timeClient.getHours();
   int minutes  = timeClient.getMinutes();
