@@ -17,6 +17,9 @@ void setup() {
 }
 
 
+float get_farenheit(float celcius){
+  return (celcius * 9/5 ) + 32 ;
+}
 
 void loop() {
 
@@ -38,6 +41,9 @@ void loop() {
   displayHumidity(humidity);        // Call the function to display humidity value
   displayTemperature(temperature);  // Call the function to display temperature value
   displayIntensity(Iluminance);  // Call the function to display temperature value
+
+
+   float farenheit = get_farenheit(temperature) ;
 
 
 
